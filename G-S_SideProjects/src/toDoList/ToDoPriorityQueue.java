@@ -3,7 +3,9 @@ package toDoList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.Stack;
@@ -13,63 +15,13 @@ import toDoList.ToDoItem.AssignmentType;
 public class ToDoPriorityQueue extends PriorityQueue<ToDoItem> implements ToDoPriorityQueueInterface{
 
 	private Stack<ToDoItem> undoStack;
-	public ToDoPriorityQueue late = new ToDoPriorityQueue();
 	
 	public ToDoPriorityQueue() {
 		undoStack = new Stack();
 	}
+	
 
-	public boolean loadFile(String csvFilePath) {
-        
-        try (Scanner inputFile = new Scanner(new File(csvFilePath))) {
-                inputFile.useDelimiter(",");
-                if (!inputFile.hasNextLine()) {
-                        throw new FileNotFoundException();
-                }
-                else {
-                        while (inputFile.hasNextLine()) {
-                        	String ToDoClass = inputFile.next();
-                        	String assignmentType = inputFile.next().toUpperCase();
-                        	String content = inputFile.next();
-                        	String[] calendarSTR = inputFile.next().split(" ");
-                        	Calendar cal = Calendar.getInstance();
-                        	cal.set(Integer.valueOf(calendarSTR[5]), 
-                        			getMonthNum(calendarSTR[1]),
-                        			Integer.valueOf(calendarSTR[2]),
-                        			Integer.valueOf(calendarSTR[3].split(":")[0]),
-                        			Integer.valueOf(calendarSTR[3].split(":")[1]));
-                        	ToDoItem newItem = new ToDoItem(ToDoClass, 
-                        			AssignmentType.valueOf(assignmentType), 
-                        			content, 
-                        			cal);
-                        	if(newItem.late()) {
-                        		late.add(newItem);
-                        	}
-                        	else {
-                        		this.add(newItem);
-                        	}
-                        	
-                            if(inputFile.hasNext()) {
-                            	inputFile.nextLine();    
-                            }
-                        }
-                        return true;
-                }
-        }catch(Exception e) {
-        	//make new file with said name instead
-            //throw new FileNotFoundException("file is not found");
-        	try {
-        		File newFile = new File(csvFilePath);
-				return newFile.createNewFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-        	return false;
-        	
-        }
-	}
-	private int getMonthNum(String s) {
+	public int getMonthNum(String s) {
 		if(s.equals("Jan")) {
 			return 1;
 		}
@@ -149,4 +101,6 @@ public class ToDoPriorityQueue extends PriorityQueue<ToDoItem> implements ToDoPr
 			return true;
 		}
 	}
+
+
 }

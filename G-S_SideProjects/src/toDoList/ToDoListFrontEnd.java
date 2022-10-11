@@ -4,12 +4,13 @@ import java.time.Instant;
 import java.util.Calendar;
 
 public class ToDoListFrontEnd {
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		
-		
+	
 		Calendar cal0 = Calendar.getInstance();
 		cal0.set(2022, 11, 31);
 		Calendar cal1 = Calendar.getInstance();
@@ -40,7 +41,7 @@ public class ToDoListFrontEnd {
 		ToDoItem item2 = new ToDoItem("Math", ToDoItem.AssignmentType.EXAM, "3rd priority", cal2);
 		ToDoItem item3 = new ToDoItem("Math", ToDoItem.AssignmentType.CHORE, "4th priority", cal3);
 		ToDoItem item4 = new ToDoItem("Math", ToDoItem.AssignmentType.HOMEWORK, "5th priority", cal4);
-
+	
 		
 		ToDoPriorityQueue queue = new ToDoPriorityQueue();
 		queue.add(item0);
@@ -50,10 +51,6 @@ public class ToDoListFrontEnd {
 		queue.add(item4);
 		
 		while(!queue.isEmpty()) {
-			System.out.println(queue.remove().thisContent);
-			System.out.println(queue.remove().thisContent);
-			System.out.println(queue.remove().thisContent);
-			System.out.println(queue.remove().thisContent);
 			System.out.println(queue.remove().thisContent);
 		}
 		
