@@ -15,9 +15,11 @@ import toDoList.ToDoItem.AssignmentType;
 public class ToDoPriorityQueue extends PriorityQueue<ToDoItem> implements ToDoPriorityQueueInterface{
 
 	private Stack<ToDoItem> undoStack;
+	public ArrayList<String> classes;
 	
 	public ToDoPriorityQueue() {
 		undoStack = new Stack();
+		classes = new ArrayList<String>();
 	}
 	
 
@@ -101,6 +103,12 @@ public class ToDoPriorityQueue extends PriorityQueue<ToDoItem> implements ToDoPr
 			return true;
 		}
 	}
-
+	
+	public boolean addTo(ToDoItem item){
+		if(!classes.contains(item.thisClass)){
+			classes.add(item.thisClass);
+		}
+		return this.add(item);
+	}
 
 }

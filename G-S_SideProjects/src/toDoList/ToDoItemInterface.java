@@ -12,6 +12,7 @@ public interface ToDoItemInterface extends Comparable<ToDoItem>{
 	public boolean late();
 	public int compareTo(ToDoItem item);
 	public long calendarCompareTo( Calendar now);
+	
 
 }
 //Lets see if you can see this lol

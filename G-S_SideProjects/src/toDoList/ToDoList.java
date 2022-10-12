@@ -3,6 +3,8 @@ package toDoList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.*;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -16,10 +18,19 @@ public class ToDoList implements ToDoListInterface{
     public ToDoPriorityQueue currToDo;
     public ToDoPriorityQueue late;
     private HashMap classList = new HashMap();
+    public ArrayList<String> colors = new ArrayList<String>();
 	
     public ToDoList(){
         currToDo = new ToDoPriorityQueue();
         late = new ToDoPriorityQueue();
+        colors.add("red");
+        colors.add("yellow"); 
+        colors.add("blue");
+        colors.add("green");
+        colors.add("orange");
+        colors.add("purple");
+        colors.add("pink");
+        colors.add("brown");
     }
 
     public boolean loadFile(String csvFilePath) {
@@ -46,10 +57,10 @@ public class ToDoList implements ToDoListInterface{
                         			content, 
                         			cal);
                         	if(newItem.late()) {
-                        		late.add(newItem);
+                        		late.addTo(newItem);
                         	}
                         	else {
-                        		currToDo.add(newItem);
+                        		currToDo.addTo(newItem);
                         	}
                         	
                             if(inputFile.hasNext()) {
@@ -74,15 +85,29 @@ public class ToDoList implements ToDoListInterface{
 	}
 	public String getClassColor(ToDoItem item) {
 		// TODO Auto-generated method stub
-		String temp = item.thisClass;
-
+        String temp = item.thisClass;
+        if(temp.equals("N/A") || colors.size() == 0){
+            return "";
+        }
+        if(classList.get(temp) == null){
+            Random rand = new Random();
+            int num = rand.nextInt(colors.size()-1);
+		    classList.put(temp, colors.get(num));
+            colors.remove(num);
+        }
+        return (String)(classList.get(temp));
 		
-		return null;
 	}
 
     @Override
     public boolean late() {
         // TODO Auto-generated method stub
-        return false;
+        // if late then move to late queue
+        for(ToDoItem item : currToDo){
+            if(item.late()){
+                currToDo.move(item, late);
+            }
+        }
+        return true;
     }
 }
