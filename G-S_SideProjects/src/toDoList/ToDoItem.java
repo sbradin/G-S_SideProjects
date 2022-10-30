@@ -23,7 +23,11 @@ public class ToDoItem implements ToDoItemInterface{
 		thisContent = content;
 		thisDueDate = dueDate;
 	}
-
+	
+	@Override
+	public String toString(){
+	    return thisAssignmentType.toString() + " for " + thisClass + "\n" + "Due on " + thisDueDate.toString() + "\n Description: " + thisContent;
+	}
 	@Override
 	public String getItemClass() {
 		// TODO Auto-generated method stub
