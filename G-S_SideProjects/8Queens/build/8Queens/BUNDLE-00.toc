@@ -1,0 +1,3 @@
+([('8Queens',
+   '/Users/sambradin/Downloads/8Queens/dist/8Queens',
+   'EXECUTABLE')],)
